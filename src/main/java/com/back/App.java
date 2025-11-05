@@ -10,10 +10,10 @@ import java.util.Scanner;
 public class App {
     private final Scanner scanner = new Scanner(System.in);
     private final SystemController systemController = new SystemController();
-    private final WiseSayingController wiseSayingController = new WiseSayingController();
+    private final WiseSayingController wiseSayingController = new WiseSayingController(scanner);
 
-//    init
-    public App(){
+//        init
+    public App() {
     }
 
     public void run() {
@@ -25,7 +25,7 @@ public class App {
                     || command.startsWith("삭제") || command.startsWith("수정")
                     || command.startsWith("빌드")) {
                 wiseSayingController.handleCommand(command);
-            } else{
+            } else {
                 systemController.handleCommand(command);
             }
         }

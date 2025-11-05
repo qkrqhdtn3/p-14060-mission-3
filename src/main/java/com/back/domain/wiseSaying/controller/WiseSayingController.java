@@ -11,22 +11,24 @@ import java.util.Scanner;
 
 public class WiseSayingController {
     private final WiseSayingService wiseSayingService = new WiseSayingService();
-    private final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
     private final String lastIdFilePath = "db/wiseSaying/lastId.txt";
     private final String wiseSayingDirPath = "db/wiseSaying/";
+
+    public WiseSayingController(Scanner scanner){
+        this.scanner = scanner;
+    }
 
     public void handleCommand(String command) {
         if (command.startsWith("등록")) {
             System.out.print("명언 : ");
-//            debug
-            System.out.println(command);
             String content = scanner.nextLine();
             System.out.print("작가 : ");
             String author = scanner.nextLine();
             WiseSaying wiseSaying = wiseSayingService.add(content, author);
             System.out.println(wiseSaying.getId() + "번 명언이 등록되었습니다.");
         } else if (command.startsWith("목록")) {
-            System.out.println(" 번호 / 작가 / 명언\n------------------------");
+            System.out.println("번호 / 작가 / 명언\n------------------------");
             List<WiseSaying> wiseSayings = wiseSayingService.list();
             for(WiseSaying wiseSaying : wiseSayings){
                 System.out.printf("%d / %s / %s\n", wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getContent());
