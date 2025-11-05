@@ -13,8 +13,9 @@ public class WiseSayingService {
     public WiseSaying add(String content, String author){
         int lastId = wiseSayingRepository.getLastId() + 1;
         wiseSayingRepository.setLastId(lastId);
-        wiseSayingRepository.saveFile(new WiseSaying(lastId, content, author));
-        return null;
+        WiseSaying wiseSaying = new WiseSaying(lastId, content, author);
+        wiseSayingRepository.saveFile(wiseSaying);
+        return wiseSaying;
     }
 
     public List<WiseSaying> list() {

@@ -123,7 +123,7 @@ public class WiseSayingRepository {
 
     public void saveFile(WiseSaying wiseSaying) {
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(wiseSayingDirPath + wiseSaying.getId() + ".json");
+            FileOutputStream fileOutputStream = new FileOutputStream(wiseSayingDirPath + Integer.toString(wiseSaying.getId()) + ".json");
             byte b[] = wiseSaying.toJsonString().getBytes();
             fileOutputStream.write(b);
             fileOutputStream.close();

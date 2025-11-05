@@ -18,6 +18,8 @@ public class WiseSayingController {
     public void handleCommand(String command) {
         if (command.startsWith("등록")) {
             System.out.print("명언 : ");
+//            debug
+            System.out.println(command);
             String content = scanner.nextLine();
             System.out.print("작가 : ");
             String author = scanner.nextLine();
