@@ -16,8 +16,7 @@ public class WiseSayingControllerTest {
                 작자미상
                 종료
                 """);
-//        debug
-//        System.out.println(out);
+
         assertThat(addOut)
                 .contains("명언 :")
                 .contains("작가 :")
@@ -33,8 +32,8 @@ public class WiseSayingControllerTest {
                 """);
 
         assertThat(listOut)
-                .contains("번호 / 작가 / 명언\n------------------------");
-//                .contains("1 / 작자미상 / 현재를 사랑하라.");
+                .contains("번호 / 작가 / 명언\n------------------------")
+                .contains("/ 작자미상 / 현재를 사랑하라.");
     }
 
     @Test
@@ -81,7 +80,6 @@ public class WiseSayingControllerTest {
     @Test
     @DisplayName("수정")
     void t6() {
-//        목록에서 id를 얻어와서 삭제 수행
         final String updateOut = AppTestRunner.run("""
                 수정?id=1
                 update test content
@@ -99,7 +97,6 @@ public class WiseSayingControllerTest {
     @Test
     @DisplayName("빌드")
     void t7() {
-//        목록에서 id를 얻어와서 삭제 수행
         final String updateOut = AppTestRunner.run("""
                 빌드
                 종료
