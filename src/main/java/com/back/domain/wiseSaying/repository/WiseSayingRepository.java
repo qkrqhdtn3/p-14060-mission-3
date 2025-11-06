@@ -5,7 +5,6 @@ import com.back.domain.wiseSaying.entity.WiseSaying;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class WiseSayingRepository {
     private final List<WiseSaying> wiseSayings = new ArrayList<>();
@@ -138,6 +137,7 @@ public class WiseSayingRepository {
     }
 
     public List<WiseSaying> findAll() {
+        wiseSayings.sort((a, b) -> b.getId() - a.getId());
         return wiseSayings;
     }
 

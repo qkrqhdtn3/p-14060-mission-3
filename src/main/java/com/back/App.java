@@ -3,8 +3,6 @@ package com.back;
 import com.back.domain.system.controller.SystemController;
 import com.back.domain.wiseSaying.controller.WiseSayingController;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.Scanner;
 
 public class App {

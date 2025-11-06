@@ -7,8 +7,6 @@ import java.util.List;
 
 public class WiseSayingService {
     private final WiseSayingRepository wiseSayingRepository = new WiseSayingRepository();
-    private final String lastIdFilePath = "db/wiseSaying/lastId.txt";
-    private final String wiseSayingDirPath = "db/wiseSaying/";
 
     public WiseSaying add(String content, String author){
         int lastId = wiseSayingRepository.getLastId() + 1;

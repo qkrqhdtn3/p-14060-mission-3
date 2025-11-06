@@ -3,17 +3,12 @@ package com.back.domain.wiseSaying.controller;
 import com.back.domain.wiseSaying.entity.WiseSaying;
 import com.back.domain.wiseSaying.service.WiseSayingService;
 
-import java.io.File;
-import java.sql.SQLOutput;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class WiseSayingController {
     private final WiseSayingService wiseSayingService = new WiseSayingService();
     private final Scanner scanner;
-    private final String lastIdFilePath = "db/wiseSaying/lastId.txt";
-    private final String wiseSayingDirPath = "db/wiseSaying/";
 
     public WiseSayingController(Scanner scanner){
         this.scanner = scanner;
@@ -34,7 +29,8 @@ public class WiseSayingController {
                 System.out.printf("%d / %s / %s\n", wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getContent());
             }
         } else if (command.startsWith("삭제")) {
-            int id = Integer.parseInt(command.substring(6, command.length()));
+//            int id = Integer.parseInt(command.substring(6, command.length()));
+            int id = Integer.parseInt(command.split("\\?")[1].split("=")[1]);
             if(wiseSayingService.delete(id)){
                 System.out.println(id + "번 명언이 삭제되었습니다.");
             }
@@ -42,7 +38,8 @@ public class WiseSayingController {
                 System.out.println(id + "번 명언은 존재하지 않습니다.");
             }
         } else if (command.startsWith("수정")) {
-            int id = Integer.parseInt(command.substring(6, command.length()));
+//            int id = Integer.parseInt(command.substring(6, command.length()));
+            int id = Integer.parseInt(command.split("\\?")[1].split("=")[1]);
             WiseSaying wiseSaying = wiseSayingService.findById(id);
             if(wiseSaying == null){
                 System.out.println(id + "번 명언은 존재하지 않습니다.");
