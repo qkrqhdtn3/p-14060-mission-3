@@ -34,24 +34,13 @@ public class WiseSaying {
     }
     public String toJsonString(){
         String result;
-//        result = "{\n" +
-//                "  \"id\": " + id + ",\n" +
-//                "  \"content\": \"" + content + "\",\n" +
-//                "  \"author\": \"" + author + "\"\n" +
-//                "}";
-
-        Map<String, String> map = new HashMap<>();
-        map.put("id", Integer.toString(id));
-        map.put("content", content);
-        map.put("author", author);
-
-        StringBuffer sb = new StringBuffer("{\n");
-        sb.append("  \"id\": " + map.get("id") + ",\n");
-        sb.append("  \"content\": \"" + map.get("content") + "\",\n");
-        sb.append("  \"author\": \"" + map.get("author") + "\"\n");
-        sb.append("}");
-
-        result = sb.toString();
+        result = """
+                    {
+                      "id": %d,
+                      "content": "%s",
+                      "author": "%s"
+                    }
+                    """.formatted(id, content, author);
         return result;
     }
 }

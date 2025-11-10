@@ -30,8 +30,20 @@ public class WiseSayingRepository {
         }
 
         loadWiseSayingsOnStart();
+        //        앱이 시작할 때 명언이 0개라면 샘플 명언을 10개 생성
+        makeSampleWiseSayingsIfNone();
     }
-
+    private void makeSampleWiseSayingsIfNone() {
+        if (wiseSayings.size() == 0) {
+            setLastId(0);
+            for (int i = 1; i <= 10; i++) {
+                int lastId = getLastId() + 1;
+                setLastId(lastId);
+                WiseSaying wiseSaying = new WiseSaying(lastId, "명언 " + i, "작자미상 " + i);
+                saveFile(wiseSaying);
+            }
+        }
+    }
     public void loadWiseSayingsOnStart(){
         File file = new File(wiseSayingDirPath);
         if(file.isDirectory()){
@@ -167,13 +179,17 @@ public class WiseSayingRepository {
     }
 
     private void saveJsonDataFile() {
+        wiseSayings.sort((a, b) -> b.getId() - a.getId());
         StringBuffer sb = new StringBuffer("[\n");
-        for(WiseSaying wiseSaying : wiseSayings){
-            sb.append("  {\n");
-            sb.append("    \"id\": " + wiseSaying.getId() + ",\n");
-            sb.append("    \"content\": \"" + wiseSaying.getContent() + "\",\n");
-            sb.append("    \"author\": \"" + wiseSaying.getAuthor() + "\"\n");
-            sb.append("  },\n");
+        for(int i = wiseSayings.size() - 1; i >= 0; i--){
+            WiseSaying wiseSaying = wiseSayings.get(i);
+            sb.append("""
+                      {
+                        "id": %d,
+                        "content": "%s",
+                        "author": "%s"
+                      },
+                    """.formatted(wiseSaying.getId(), wiseSaying.getContent(), wiseSaying.getAuthor()));
         }
         if(sb.charAt(sb.length() - 2) == ','){
             sb.deleteCharAt(sb.length() - 2);

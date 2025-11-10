@@ -45,20 +45,19 @@ public class WiseSayingControllerTest {
                 종료
                 """);
 
+        String str = listOut.split("------------------------")[1];
         int delNum = 0;
-        int originalIndex = 55;
-        int listOUtIndex = originalIndex;
-        while (listOut.charAt(listOUtIndex) >= '0' && listOut.charAt(listOUtIndex) <= '9') {
-            listOUtIndex++;
-        }
-        if (listOUtIndex > originalIndex) {
-            for (int i = 0; i < listOUtIndex - originalIndex; i++) {
-                delNum *= 10;
-                delNum += listOut.charAt(originalIndex + i) - '0';
+        for(int i = 0 ; i < str.length() ; i++){
+            if(str.charAt(i) == '\n'){
+                continue;
             }
-        } else {
-//            error
-            delNum = -1;
+            if(str.charAt(i) >= '0' && str.charAt(i) <= '9'){
+                delNum *= 10;
+                delNum += str.charAt(i) - '0';
+            }
+            else{
+                break;
+            }
         }
 
         final String delOut = AppTestRunner.run("""
